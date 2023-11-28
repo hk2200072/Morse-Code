@@ -1,0 +1,91 @@
+# This is a Dictionary to translate letters, numbers, and space into Morse code
+morse_dict = { 'A':'.-', 'B':'-...',
+                    'C':'-.-.', 'D':'-..', 'E':'.',
+                    'F':'..-.', 'G':'--.', 'H':'....',
+                    'I':'..', 'J':'.---', 'K':'-.-',
+                    'L':'.-..', 'M':'--', 'N':'-.',
+                    'O':'---', 'P':'.--.', 'Q':'--.-',
+                    'R':'.-.', 'S':'...', 'T':'-',
+                    'U':'..-', 'V':'...-', 'W':'.--',
+                    'X':'-..-', 'Y':'-.--', 'Z':'--..',
+                    '1':'.----', '2':'..---', '3':'...--',
+                    '4':'....-', '5':'.....', '6':'-....',
+                    '7':'--...', '8':'---..', '9':'----.',
+                    '0':'-----', ', ':'--..--', '.':'.-.-.-',
+                    '?':'..--..', '/':'-..-.', '-':'-....-',
+                    '(':'-.--.', ')':'-.--.-'}
+
+def text_to_morse(text):
+    """
+    Function to turn regular text into Morse code.
+
+    Parameters:
+    text (str): The input text to be translated.
+
+    Returns:
+    str: The Morse code version of the input text.
+    """
+    morse_code = ''
+    # Go through each letter in the input text
+    for char in text.upper():
+    # Use the dictionary to get the Morse code for each letter
+        morse_code += morse_dict.get(char, '') + ' '
+    return morse_code
+
+def morse_to_text(morse_code):
+    """
+    Function to turn Morse code into regular text.
+
+    Parameters:
+    - morse_code (str): The input Morse code to be translated.
+
+    Returns:
+    - str: The regular text version of the input Morse code.
+    """
+    # Split Morse code into individual parts
+    morse_code = morse_code.split(' ')
+    text = ''
+    # Go through each Morse code part and match it with letters in the dictionary
+    for code in morse_code:
+        for key, value in morse_dict.items():
+            if code == value:
+                text += key
+    return text
+
+def main():
+    """
+    Main function for user interaction.
+
+    The function displays a menu that takes user input and performs text-to-Morse or Morse-to-text translation.
+    """
+    while True:
+        # Show menu options
+        print("Choose an option:")
+        print("1. Translate text to Morse code")
+        print("2. Translate Morse code to text")
+        print("3. Quit")
+
+        # Get user's choice
+        choice = input("Enter your choice (1, 2, or 3): ")
+
+        if choice == '1':
+            # Option to translate text to Morse code
+            text = input("Enter the text to translate to Morse code: ")
+            morse_code = text_to_morse(text)
+            print("Morse Code: ", morse_code)
+        elif choice == '2':
+            # Option to translate Morse code to text
+            morse_code = input("Enter the Morse code to translate: ")
+            text = morse_to_text(morse_code)
+            print("Text: ", text)
+        elif choice == '3':
+            # Option to exit the program
+            print("Exiting the program.")
+            break
+        else:
+            # Handle invalid choice
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
+if __name__ == "__main__":
+    # Run the main function when the script is executed
+    main()
